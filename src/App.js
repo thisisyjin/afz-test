@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+import RecommendMobile from "./components/common/RecommendMobile";
+import Home from "./routes/Home";
+import HospitalSearch from "./routes/HospitalSearch";
+import SearchForm from "./routes/SearchForm";
+import ImgUpload from "./routes/ImgUpload";
+import UserInfoForm from "./routes/UserInfoForm";
+import DataUploaded from "./routes/DataUploaded";
+
+const App = () => {
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+  if (!isMobile) {
+    return <RecommendMobile />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<HospitalSearch />} />
+        <Route path="/search/hospital" element={<SearchForm />} />
+        <Route path="/upload" element={<ImgUpload />} />
+        <Route path="/info" element={<UserInfoForm />} />
+        <Route path="/info/save" element={<DataUploaded />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
